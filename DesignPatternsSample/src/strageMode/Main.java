@@ -1,6 +1,12 @@
 package strageMode;
 
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Proxy;
+
+import com.qingyang.dynamicproxy.DynamicProxy;
+import com.qingyang.dynamicproxy.RealSubject;
+import com.qingyang.dynamicproxy.Subject;
 import com.qingyang.factorypattern.HangZhouIngredientFactory;
 import com.qingyang.factorypattern.PizzIngredientFactory;
 import com.qingyang.factorypattern.ShanghaiIngredientFactory;
@@ -20,6 +26,7 @@ public class Main {
     	    Duck duck = new MuteDuck();
     	    duck.fly();
     	    duck.swim();
+    	    
     	    duck.quack();
     	    
     	    System.out.println("观察者模式");
@@ -57,5 +64,10 @@ public class Main {
 	    factory.createCheese().getCheese();
 	    factory.createDough().getDough();
 	    factory.createSauce().getSauce();
+	    
+	    Subject realSubject = new  RealSubject();
+	    InvocationHandler handler  = new  DynamicProxy(realSubject);
+	    Subject subject = (Subject) Proxy.newProxyInstance(handler.getClass().getClassLoader(), realSubject.getClass().getInterfaces(), handler);
+        subject.sayHello();
     }
 }
