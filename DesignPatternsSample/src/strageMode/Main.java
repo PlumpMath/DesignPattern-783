@@ -4,6 +4,7 @@ package strageMode;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
+import com.qingyang.conditionpattern.GumballMachine;
 import com.qingyang.dynamicproxy.DynamicProxy;
 import com.qingyang.dynamicproxy.RealSubject;
 import com.qingyang.dynamicproxy.Subject;
@@ -21,6 +22,7 @@ import com.qingyang.wrappattern.IceCream;
 import com.qingyang.wrappattern.Milk;
 
 public class Main {
+	/**
     public static void main(String[] args){
     	    System.out.println("策略模式");
     	    Duck duck = new MuteDuck();
@@ -65,9 +67,17 @@ public class Main {
 	    factory.createDough().getDough();
 	    factory.createSauce().getSauce();
 	    
+	    System.out.println("动态代理");
 	    Subject realSubject = new  RealSubject();
 	    InvocationHandler handler  = new  DynamicProxy(realSubject);
 	    Subject subject = (Subject) Proxy.newProxyInstance(handler.getClass().getClassLoader(), realSubject.getClass().getInterfaces(), handler);
         subject.sayHello();
+        
+        System.out.println("状态模式");
+        //就是给接口根据不同的状态设置不同的接口实现
+        GumballMachine gumballMachine = new GumballMachine();
+        gumballMachine.insertQuarter();
     }
+    **/
+	
 }
